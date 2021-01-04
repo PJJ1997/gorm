@@ -234,9 +234,9 @@ func tx(db *gorm.DB, orgs []Organizaion) {
 
 // =============================== 删除特定条件记录 ===============================
 func delete(db *gorm.DB, userID string) {
-	db.Delete(Organizaion{}).Where("user_id = ?", userID)
+	db.Where("user_id = ?", userID).Delete(Organizaion{})
 
-	db.Delete(Organizaion{}).Where("user_id = ?", userID).Unscoped()
+	db.Where("user_id = ?", userID).Unscoped().Delete(Organizaion{})
 }
 
 // =============================== 原生查询SQL ===============================
