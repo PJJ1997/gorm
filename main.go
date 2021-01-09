@@ -243,3 +243,8 @@ func delete(db *gorm.DB, userID string) {
 func raw(db *gorm.DB, id string, name string) *gorm.DB {
 	return db.Raw(`SELECT * FROM organizaions WHERE id = ? and name like %?%`, id, name)
 }
+
+func forceIndex(db *gorm.DB) *gorm.DB {
+	return db.Table("companies c").
+		Joins("left join organizaions o force index(indexName) on o.id = c.entity_id")
+}
